@@ -108,3 +108,12 @@ tests/
 - On Instagram every video post is technically a Reel now, so friends' videos in the feed are covered too.
 - YouTube and Meta change their pages often, so a rule may need updating.
 - The password for switching off does not exist yet; it will be added in a later version.
+
+## Planned for the next version
+
+- **Suggested and sponsored posts are matched by their label text, so that part is English-only in
+  practice.** Reels and Shorts are matched by URL and work in every language; only this feature is
+  affected. Two fixes are needed: match word stems rather than exact phrases, so the Greek variants
+  ("για σένα" and "για εσένα", and the gender endings) all hit, and add the other common languages.
+- Facebook deliberately obfuscates the word "Sponsored" to defeat ad blockers, so sponsored detection
+  there is best-effort even in English. Instagram is more reliable.

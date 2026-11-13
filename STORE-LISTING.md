@@ -51,7 +51,7 @@ your own computer. It asks for a single permission: storage.
 Open source — the full code can be read and checked.
 ```
 
-**Category**: Productivity
+**Category**: Well-being
 **Language**: English (UK)
 
 ---

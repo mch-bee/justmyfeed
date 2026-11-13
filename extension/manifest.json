@@ -1,7 +1,7 @@
 ﻿{
   "manifest_version": 3,
   "name": "JustMyFeed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Covers Reels, Shorts, suggested and sponsored posts on YouTube, Instagram and Facebook.",
   "minimum_chrome_version": "105",
   "permissions": ["storage"],
