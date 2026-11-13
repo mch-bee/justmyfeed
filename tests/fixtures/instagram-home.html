@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><title>Instagram (mock)</title>
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; }
+  /* Like the real Instagram: the gap between posts lives INSIDE the post,
+     as margin and padding on an inner wrapper, not between the <article> elements. */
+  article { display: block; }
+  article > .inner { margin-bottom: 20px; padding-bottom: 16px; }
+  .media { background: #e5e5e5; height: 320px; }
+  header { background: #fff; padding: 8px 0; }
+</style>
+</head>
+<body>
+<!-- Simplified imitation of the Instagram home feed. -->
+<nav>
+  <div id="nav-home"><span><a href="/">Home</a></span></div>
+  <div id="nav-explore"><span><a href="/explore/">Explore</a></span></div>
+  <div id="nav-reels"><span><a href="/reels/">Reels</a></span></div>
+  <div id="nav-messages"><span><a href="/direct/inbox/">Messages</a></span></div>
+</nav>
+<main>
+  <article id="post-photo"><div class="inner"><header>friend_one</header><div class="media"></div><a href="/p/PHOTO1/">2 hours ago</a></div></article>
+  <article id="post-reel">
+    <div class="inner">
+      <header>friend_two</header>
+      <!-- A video that autoplays, as in the real feed. -->
+      <video id="reel-video" autoplay loop muted playsinline width="200" height="200"></video>
+      <a href="/reel/REEL1/">3 hours ago</a>
+    </div>
+  </article>
+  <article id="post-reel-2"><div class="inner"><header>friend_five</header><div class="media"></div><a href="/reel/REEL3/">4 hours ago</a></div></article>
+  <article id="post-carousel"><div class="inner"><header>friend_three</header><div class="media"></div><a href="/p/CAROUSEL1/">5 hours ago</a></div></article>
+  <article id="post-user-reel"><div class="inner"><header>brand</header><div class="media"></div><a href="/brand/reel/REEL2/">1 day ago</a></div></article>
+  <article id="post-suggested"><div class="inner"><header><span>random_account</span><span>•</span><span>Suggested for you</span></header><div class="media"></div><a href="/p/SUGG1/">1 day ago</a></div></article>
+  <article id="post-suggested-el"><div class="inner"><header><span>another_account</span><span>Προτεινόμενα για εσένα</span></header><div class="media"></div><a href="/p/SUGG2/">2 days ago</a></div></article>
+  <article id="post-sponsored"><div class="inner"><header><span>some_brand</span><span>Sponsored</span></header><div class="media"></div><a href="/p/AD1/">Shop now</a></div></article>
+  <!-- The phrase inside a caption must NOT count: only standalone label text does. -->
+  <article id="post-caption-mention"><div class="inner"><header>friend_four</header><div class="media">It showed me a song as suggested for you, did you hear it?</div><a href="/p/CAP1/">3 hours ago</a></div></article>
+</main>
+<script>
+  // The video takes its picture from a canvas, so it really "plays" without a video file.
+  const canvas = document.createElement('canvas');
+  canvas.width = 64; canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  setInterval(() => { ctx.fillStyle = `hsl(${(Date.now() / 10) % 360}, 80%, 50%)`; ctx.fillRect(0, 0, 64, 64); }, 50);
+  const video = document.getElementById('reel-video');
+  video.srcObject = canvas.captureStream(10);
+  video.play().catch(() => {});
+  // Imitates the site trying to play the video again, with sound.
+  window.replayWithSound = () => { video.muted = false; return video.play(); };
+</script>
+</body>
+</html>

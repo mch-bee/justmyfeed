@@ -1,0 +1,4 @@
+/* The "Reels" menu button, hidden from the first moment. */
+html:not([data-rb-off]) a[href="/reels/"] {
+  display: none !important;
+}

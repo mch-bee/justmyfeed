@@ -1,0 +1,73 @@
+﻿/* Everything core.js marks. None of it applies while protection is off (data-rb-off). */
+
+/* 1. Hidden entirely: menu buttons, tabs, filter chips, lone links. */
+html:not([data-rb-off]) [data-rb-hidden] {
+  display: none !important;
+}
+
+/* 2. Covered: posts and shelves containing Reels. They stay in place under a solid cover.
+   Deliberately no background, no overflow and no border-radius on the post itself: a background
+   would paint over the gap that separates it from the next post, and overflow would start a new
+   block formatting context, which stops margins collapsing and so changes the page's layout.
+   The cover is painted entirely by ::before. */
+html:not([data-rb-off]) [data-rb-covered] {
+  display: block !important;
+  position: relative !important;
+}
+
+/* The post's content: invisible and unclickable, but it keeps its space.
+   Applied to every descendant, with opacity as well, because some sites (YouTube) set
+   visibility: visible on inner elements, which would undo an inherited visibility: hidden. */
+html:not([data-rb-off]) [data-rb-covered] * {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* The cover itself. It stops short of the post's own trailing space (--rb-gap, measured per post
+   by core.js), so the gap to the next post stays empty and the feed keeps its rhythm. */
+html:not([data-rb-off]) [data-rb-covered]::before {
+  content: "Content blocked by JustMyFeed";
+  position: absolute;
+  inset: 0 0 var(--rb-gap, 0px) 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 0 14px 10px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #000;
+  color: #fff;
+  font: italic 500 14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  pointer-events: auto;
+  cursor: default;
+  user-select: none;
+}
+
+/* Cover image: tiled, never stretched, cropped at the edges where needed. */
+html:not([data-rb-off])[data-rb-has-image] [data-rb-covered]::before {
+  content: "";
+  background-image: var(--rb-cover-image);
+  background-repeat: repeat;
+  background-position: left top;
+  background-size: auto 128px; /* fixed tile height, width follows the image's proportions */
+}
+
+/* With an image: white italic text bottom right, no background; a faint shadow so it reads over the tiles. */
+html:not([data-rb-off])[data-rb-has-image] [data-rb-covered]::after {
+  content: "Content blocked by JustMyFeed";
+  position: absolute;
+  right: 14px;
+  bottom: calc(10px + var(--rb-gap, 0px)); /* sits inside the painted area, above the gap */
+  z-index: 2147483646;
+  color: #fff;
+  font: italic 500 14px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  pointer-events: none;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+

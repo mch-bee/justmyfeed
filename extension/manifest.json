@@ -1,0 +1,59 @@
+﻿{
+  "manifest_version": 3,
+  "name": "JustMyFeed",
+  "version": "1.0.0",
+  "description": "Covers Reels, Shorts, suggested and sponsored posts on YouTube, Instagram and Facebook.",
+  "minimum_chrome_version": "105",
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "JustMyFeed",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*", "*://m.youtube.com/*"],
+      "js": ["content/core.js", "content/youtube.js"],
+      "css": ["content/cover.css", "content/youtube.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://www.instagram.com/*"],
+      "js": ["content/core.js", "content/instagram.js"],
+      "css": ["content/cover.css", "content/instagram.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://www.facebook.com/*", "*://web.facebook.com/*", "*://m.facebook.com/*"],
+      "js": ["content/core.js", "content/facebook.js"],
+      "css": ["content/cover.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked/blocked.html"],
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://m.youtube.com/*",
+        "*://www.instagram.com/*",
+        "*://www.facebook.com/*",
+        "*://web.facebook.com/*",
+        "*://m.facebook.com/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+﻿{
+  "name": "justmyfeed",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome extension that blocks Reels and Shorts on YouTube, Instagram and Facebook.",
+  "scripts": {
+    "test": "playwright test",
+    "test:offline": "playwright test --project=offline",
+    "test:live": "playwright test --project=live",
+    "test:watch": "playwright test --headed --workers=1",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0"
+  }
+}

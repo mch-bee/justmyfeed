@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"><title>Facebook, rewritten feed (mock)</title>
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; }
+  .unit > .card { background: #fff; border: 1px solid #ced0d4; margin-bottom: 16px; padding-bottom: 12px; }
+  .media { background: #e4e6eb; height: 200px; }
+</style>
+</head>
+<body>
+<!-- The feed as it looks when an extension such as F.B. Purity rewrites it: no role="feed",
+     each unit marked with aria-posinset instead. -->
+<div role="navigation">
+  <ul>
+    <li id="nav-friends"><a href="https://www.facebook.com/friends/">Friends</a></li>
+    <li id="nav-reels"><a href="https://www.facebook.com/reel/?s=tab">Reels</a></li>
+  </ul>
+</div>
+<div role="main">
+  <div><div><div>
+    <div class="unit" aria-posinset="1" id="unit-normal"><div class="card"><span>A friend posted a photo</span><div class="media"></div><a href="https://www.facebook.com/photo/?fbid=1">photo</a></div></div>
+    <div class="unit" aria-posinset="2" id="unit-reels"><div class="card"><span>Reels</span><div class="media"></div><a href="https://www.facebook.com/reel/111">Reel 1</a><a href="/reel/222">Reel 2</a></div></div>
+    <div class="unit" aria-posinset="3" id="unit-video"><div class="card"><span>A normal video</span><div class="media"></div><a href="https://www.facebook.com/watch/?v=555">video</a></div></div>
+    <div class="unit" aria-posinset="4" id="unit-suggested"><div class="card"><span>Some Page</span><span>Suggested for you</span><div class="media"></div><a href="https://www.facebook.com/SomePage/posts/9">post</a></div></div>
+    <div class="unit" aria-posinset="5" id="unit-sponsored"><div class="card"><span>Shop</span><span>Sponsored</span><div class="media"></div><a href="https://www.facebook.com/Shop/posts/7">product</a></div></div>
+    <div class="unit" aria-posinset="6" id="unit-normal-2"><div class="card"><span>Another friend</span><div class="media"></div><a href="https://www.facebook.com/photo/?fbid=2">photo</a></div></div>
+  </div></div></div>
+</div>
+</body>
+</html>

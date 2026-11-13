@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>YouTube (δοκιμαστική)</title></head>
+<body>
+<!-- Απλοποιημένη μίμηση της δομής του YouTube, για offline τεστ. -->
+<ytd-app>
+  <div id="guide">
+    <ytd-guide-entry-renderer id="guide-home"><a id="endpoint" title="Home" href="/">Home</a></ytd-guide-entry-renderer>
+    <ytd-guide-entry-renderer id="guide-shorts"><a id="endpoint" title="Shorts">Shorts</a></ytd-guide-entry-renderer>
+    <ytd-guide-entry-renderer id="guide-subs"><a id="endpoint" title="Subscriptions" href="/feed/subscriptions">Subscriptions</a></ytd-guide-entry-renderer>
+    <ytd-mini-guide-entry-renderer id="mini-guide-shorts" aria-label="Shorts"><a href="/shorts/">Shorts</a></ytd-mini-guide-entry-renderer>
+    <ytd-mini-guide-entry-renderer id="mini-guide-home" aria-label="Home"><a href="/">Home</a></ytd-mini-guide-entry-renderer>
+  </div>
+
+  <div id="chips">
+    <yt-chip-cloud-chip-renderer id="chip-all">All</yt-chip-cloud-chip-renderer>
+    <yt-chip-cloud-chip-renderer id="chip-shorts">Shorts</yt-chip-cloud-chip-renderer>
+    <yt-chip-cloud-chip-renderer id="chip-music">Music</yt-chip-cloud-chip-renderer>
+  </div>
+
+  <ytd-rich-grid-renderer>
+    <ytd-rich-item-renderer id="video-1"><a href="/watch?v=regular1">Κανονικό βίντεο 1</a></ytd-rich-item-renderer>
+    <ytd-rich-section-renderer id="shorts-section">
+      <ytd-rich-shelf-renderer is-shorts>
+        <span>Shorts</span>
+        <ytd-rich-item-renderer><ytm-shorts-lockup-view-model><a href="/shorts/s1">Short 1</a></ytm-shorts-lockup-view-model></ytd-rich-item-renderer>
+        <ytd-rich-item-renderer><ytm-shorts-lockup-view-model><a href="/shorts/s2">Short 2</a></ytm-shorts-lockup-view-model></ytd-rich-item-renderer>
+      </ytd-rich-shelf-renderer>
+    </ytd-rich-section-renderer>
+    <ytd-rich-item-renderer id="video-2"><a href="/watch?v=regular2">Κανονικό βίντεο 2</a></ytd-rich-item-renderer>
+    <ytd-rich-item-renderer id="lone-short"><ytm-shorts-lockup-view-model-v2><a href="/shorts/s3">Μεμονωμένο Short</a></ytm-shorts-lockup-view-model-v2></ytd-rich-item-renderer>
+    <!-- Ράφι Shorts που προστίθεται αργότερα (σαν infinite scroll): πρέπει να κρυφτεί κι αυτό. -->
+    <div id="late-slot"></div>
+  </ytd-rich-grid-renderer>
+
+  <div id="search-results">
+    <ytd-video-renderer id="search-video"><a href="/watch?v=regular3">Αποτέλεσμα αναζήτησης</a></ytd-video-renderer>
+    <grid-shelf-view-model id="search-shorts-grid">
+      <span>Shorts</span>
+      <ytm-shorts-lockup-view-model><a href="/shorts/s4">Short στην αναζήτηση</a></ytm-shorts-lockup-view-model>
+    </grid-shelf-view-model>
+    <ytd-video-renderer id="search-short-as-video"><a href="https://www.youtube.com/shorts/s5">Short σαν κανονικό αποτέλεσμα</a></ytd-video-renderer>
+  </div>
+
+  <div id="channel-tabs">
+    <yt-tab-shape id="tab-videos" tab-title="Videos">Videos</yt-tab-shape>
+    <yt-tab-shape id="tab-shorts" tab-title="Shorts">Shorts</yt-tab-shape>
+    <yt-tab-shape id="tab-live" tab-title="Live">Live</yt-tab-shape>
+  </div>
+
+  <div id="description"><p id="description-text">Περιγραφή βίντεο με <a id="description-short-link" href="/shorts/s6">σύνδεσμο σε Short</a> μέσα στο κείμενο.</p></div>
+
+  <button id="spa-nav" type="button">Μετάβαση σε Short χωρίς φόρτωση σελίδας</button>
+  <button id="add-late-shelf" type="button">Πρόσθεσε ράφι</button>
+</ytd-app>
+<script>
+  document.getElementById('spa-nav').addEventListener('click', () => history.pushState(null, '', '/shorts/spa1'));
+  document.getElementById('add-late-shelf').addEventListener('click', () => {
+    document.getElementById('late-slot').innerHTML =
+      '<ytd-rich-section-renderer id="late-shelf"><ytd-rich-shelf-renderer><span>Shorts</span>' +
+      '<ytd-rich-item-renderer><ytm-shorts-lockup-view-model><a href="/shorts/late">Short που ήρθε αργότερα</a></ytm-shorts-lockup-view-model></ytd-rich-item-renderer>' +
+      '</ytd-rich-shelf-renderer></ytd-rich-section-renderer>';
+  });
+</script>
+</body>
+</html>

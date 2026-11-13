@@ -1,0 +1,10 @@
+node_modules/
+test-results/
+playwright-report/
+
+# The built extension package, rebuilt on demand
+*.zip
+
+# Saved real pages: they contain your personal feed and never go online.
+tests/fixtures/real/*
+!tests/fixtures/real/README.md

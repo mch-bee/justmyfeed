@@ -1,0 +1,14 @@
+/* Shorts buttons and tabs: hidden from the first moment, before the JavaScript runs. */
+html:not([data-rb-off]) ytd-guide-entry-renderer:has(a[title="Shorts"]),
+html:not([data-rb-off]) ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+html:not([data-rb-off]) yt-tab-shape[tab-title="Shorts"] {
+  display: none !important;
+}
+
+/* Shorts shelves: invisible (but in place) until the JavaScript covers them, so they do not flash. */
+html:not([data-rb-off]) ytd-reel-shelf-renderer:not([data-rb-covered]),
+html:not([data-rb-off]) ytd-rich-shelf-renderer[is-shorts]:not([data-rb-covered]),
+html:not([data-rb-off]) ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]):not([data-rb-covered]),
+html:not([data-rb-off]) grid-shelf-view-model:has(ytm-shorts-lockup-view-model, ytm-shorts-lockup-view-model-v2):not([data-rb-covered]) {
+  visibility: hidden !important;
+}
